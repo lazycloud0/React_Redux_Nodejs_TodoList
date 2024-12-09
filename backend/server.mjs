@@ -12,9 +12,10 @@ const PORT = 9091;
 //CORS configuration
 app.use(
   cors({
-    origin: "http://localhost:9091", // React app URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: "http://localhost:3000", // React app URL
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIOMS"],
     credentials: true,
+    allowedHeaders: ["Content-Type"],
   })
 );
 
@@ -27,7 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/todos", (req, res) => {
-  res.json([{ id: 1, text: "Test todo", completed: false }]);
+  res.json(todos);
 });
 
 app.post("/api/todos", (req, res) => {
@@ -36,8 +37,21 @@ app.post("/api/todos", (req, res) => {
   res.json(newTodo);
 });
 
+app.put("/api/todos/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const todoIndex = todos.findIndex((todo) => todo.id === id);
+
+  if (todoIndex === -1) {
+    return res.status(404).json({ message: "Todo not found" });
+  }
+
+  todos[todoIndex] = { ...todos[todoIndex], ...req.body };
+  res.json(todos[todoIndex]);
+});
+
 app.delete("/api/todos/:id", (req, res) => {
-  todos = todos.filter((todo) => todo.id !== parseInt(req.params.id));
+  const id = parseInt(req.params.id);
+  todos = todos.filter((todo) => todo.id !== id);
   res.json({ message: "Todo deleted" });
 });
 

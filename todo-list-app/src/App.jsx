@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import dotenv from "dotenv";
-
-// dotenv.config();
-
-// const apiUrl = process.env.REACT_APP_API_URL;
+import "./App.css";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 const apiURL = "http://localhost:9091";
 
@@ -24,11 +22,13 @@ const App = () => {
         setError("Failed to fetch todos");
       }
     };
-
     fetchTodos();
   }, []);
 
-  const handleAddTodo = async () => {
+  const handleAddTodo = async (e) => {
+    e.preventDefault();
+    if (!newTodo.trim()) return;
+
     try {
       const response = await axios.post(`${apiURL}/api/todos`, {
         text: newTodo,
@@ -39,6 +39,25 @@ const App = () => {
     } catch (error) {
       console.error("Error adding todo:", error);
       setError("Failed to add todo");
+    }
+  };
+
+  const handleToggleTodo = async (id) => {
+    try {
+      const todo = todos.find((t) => t.id === id);
+      if (!todo) return;
+
+      await axios.put(`${apiURL}/api/todos/${id}`, {
+        completed: !todo.completed,
+      });
+
+      setTodos(
+        todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+      );
+      setError(null);
+    } catch (error) {
+      console.error("Error toggling todo:", error);
+      setError("Failed to update todo");
     }
   };
 
@@ -53,42 +72,20 @@ const App = () => {
     }
   };
 
-  const handleToggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
   return (
-    <div>
+    <div className="todo-container">
       <h1>Todo List</h1>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      <input
-        type="text"
-        value={newTodo || ""}
-        onChange={(e) => setNewTodo(e.target.value)}
-        placeholder="Enter a new todo"
+      {error && <div className="error">{error}</div>}
+      <TodoForm
+        newTodo={newTodo}
+        setNewTodo={setNewTodo}
+        handleAddTodo={handleAddTodo}
       />
-      <button onClick={handleAddTodo} disabled={!newTodo}>
-        Add Todo
-      </button>
-      <ul>
-        {todos.map((todo) => (
-          <li
-            key={todo.id}
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-              color: todo.completed ? "red" : "black",
-            }}
-            onClick={() => handleToggleTodo(todo.id)}
-          >
-            {todo.text}
-            <button onClick={() => handleRemoveTodo(todo.id)}>Complete</button>
-          </li>
-        ))}
-      </ul>
+      <TodoList
+        todos={todos}
+        handleToggleTodo={handleToggleTodo}
+        handleRemoveTodo={handleRemoveTodo}
+      />
     </div>
   );
 };

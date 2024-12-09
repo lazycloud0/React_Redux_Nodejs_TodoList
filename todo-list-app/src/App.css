@@ -1,31 +1,178 @@
-#app {
-  display: flex;
-  flex-direction: column;
+/* Container and Layout */
+.todo-container {
+  width: 90%;
+  min-width: 300px;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: clamp(1rem, 5vw, 2rem);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  color: #7c7c7c;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
-input {
-  padding: 10px 20px;
-  border: 1px solid black;
-  border-radius: 10px;
+/* Input Section */
+.input-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
 }
 
+.input-container input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  flex: 1;
+  font-family: "Open Sans", sans-serif;
+  color: #777777;
+}
+
+/* Button Styles */
 button {
-  padding: 10px 20px;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  background-color: rgba(204, 204, 204, 0.713);
+  background: none;
+  border: none;
+  padding: 0.8rem;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: rgba(7, 162, 7, 0.568);
+.input-container button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-ul li {
+.input-container .material-icons {
+  font-size: 2rem;
+  color: #f64000;
+  transition: all 0.2s ease;
+}
+
+.input-container button:hover .material-icons {
+  color: #d93000;
+  transform: scale(1.2);
+}
+
+/* Todo List */
+ul {
   list-style: none;
+  padding: 0;
 }
 
-.todo button {
-  margin: 5px;
+li {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+li:hover {
+  background-color: #e3e3e3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Todo Text */
+.todo-text {
+  flex-grow: 1;
+  margin: 0 1rem;
+  padding-left: 2rem;
+  transition: transform 0.3s ease, text-decoration 0.3s ease;
+  text-decoration-color: #b4b4b4;
+  color: #7c7c7c;
+}
+
+li:hover .todo-text {
+  transform: translateX(40px);
+}
+
+/* Delete Button */
+.delete-btn {
+  position: absolute;
+  left: -40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: left 0.3s ease;
+  padding: 0.5rem;
+}
+
+.delete-btn .material-icons {
+  color: #f64000;
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+li:hover .delete-btn {
+  left: 0.5rem;
+}
+
+/* Complete Button */
+.complete-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.complete-btn:hover {
+  opacity: 1;
+}
+
+.complete-btn .material-icons {
+  font-size: 1.5rem;
+  color: #dd3000;
+  transition: color 0.2s ease;
+}
+
+/* Completed State */
+.material-icons.completed {
+  color: #05ccff;
+  animation: completedPulse 0.3s ease;
+}
+
+/* Animations */
+@keyframes completedPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 350px) {
+  .input-container {
+    gap: 0.5rem;
+  }
+
+  input,
+  button {
+    padding: 0.6rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .todo-container {
+    margin: 3rem auto;
+  }
 }
