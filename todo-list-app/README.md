@@ -84,7 +84,7 @@ The application will run on http://localhost:3000.
 
 ### State Management
 
-The application uses Redux for state management. The store is defined in store.js and includes actions for adding, removing, and toggling todos.
+The application uses Redux for state management. The store is defined in `store.js` and includes actions for adding, removing, and toggling todos.
 
 ### Polyfills
 
@@ -93,6 +93,16 @@ In `index.js`, polyfills for `Buffer` and `process` are added to ensure compatib
 ### Styling
 
 The application uses CSS for styling. The main styles are defined in `App.css` and `index.css`.
+
+### UI and Dynamic UX
+
+The application includes various animations and dynamic user experience enhancements to improve usability and aesthetics:
+
+- **Hover Effects**: Todo items have hover effects that change the background color and slightly elevate the item to provide visual feedback.
+- **Delete Button Animation**: The delete button slides in from the left when hovering over a todo item, making it easily accessible.
+- **Complete Button Animation**: The complete button changes color and scales up slightly when toggled, providing a visual indication of the action.
+- **Completed State Animation**: When a todo item is marked as completed, it pulses briefly to draw attention to the change.
+- **Responsive Design**: The layout adjusts for different screen sizes, ensuring a good user experience on both mobile and desktop devices.
 
 ### License
 
