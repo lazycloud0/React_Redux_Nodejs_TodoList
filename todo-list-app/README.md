@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# React-Redux Node.js Todo List
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a Todo List application built with React, Redux, and Node.js. It allows users to add, toggle, and delete tasks. The backend is implemented using Express.js and provides a RESTful API for managing todos.
 
-## Available Scripts
+## Project Structure
 
-In the project directory, you can run:
+```
+backend/
+  .env
+  .gitignore
+  package.json
+  server.mjs
+todo-list-app/
+  .env
+  .gitignore
+  config-overrides.js
+  package.json
+  public/
+    index.html
+  src/
+    App.css
+    App.jsx
+    components/
+      TodoForm.jsx
+      TodoItem.jsx
+      TodoList.jsx
+    index.css
+    index.js
+    store.js
+  webpack.config.js
+```
 
-### `npm start`
+## Backend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The backend is a Node.js application using Express.js to provide a RESTful API for managing todos.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Setup
 
-### `npm test`
+Navigate to the `backend` directory:
+`cd backend`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Install dependencies:
 
-### `npm run build`
+`npm install`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Start the server:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`npm start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The server will run on http://localhost:9091.
 
-### `npm run eject`
+### API Endpoints
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**_GET_** /api/todos: Retrieve all todos.
+**_POST_** /api/todos: Create a new todo.
+**_PUT_** /api/todos/:id: Update a todo by ID.
+**_DELETE_** /api/todos/:id: Delete a todo by ID.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Frontend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The frontend is a React application using Redux for state management.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Setup
 
-## Learn More
+Navigate to the `todo-list-app` directory:
+`cd todo-list-app`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Install dependencies:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`npm install`
 
-### Code Splitting
+### Start the development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`npm start`
 
-### Analyzing the Bundle Size
+The application will run on http://localhost:3000.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Components
 
-### Making a Progressive Web App
+**_App.jsx_**: Main component that fetches todos and renders TodoForm and TodoList.
+**_TodoForm.jsx_**: Form component for adding new todos.
+**_TodoItem.jsx_**: Component for displaying individual todo items.
+**_TodoList.jsx_**: Component for displaying the list of todos.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### State Management
 
-### Advanced Configuration
+The application uses Redux for state management. The store is defined in store.js and includes actions for adding, removing, and toggling todos.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Polyfills
 
-### Deployment
+In `index.js`, polyfills for `Buffer` and `process` are added to ensure compatibility with browser environments:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Styling
 
-### `npm run build` fails to minify
+The application uses CSS for styling. The main styles are defined in `App.css` and `index.css`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+### Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+### Learn More
+
+To learn more about React, Redux, and Node.js, check out the following resources:
+
+React Documentation
+Redux Documentation
+Express.js Documentation
